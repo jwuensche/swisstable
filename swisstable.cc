@@ -88,6 +88,12 @@ extern "C" void * swisstable_map_search(swisstablemap_t *root, const void *key, 
     return const_cast<void *>((*search).second);
 }
 
+extern "C" size_t swisstable_map_erase(swisstablemap_t *root, const void* key, size_t keysize)
+{
+    std::string_view result((char *)(key), keysize);
+    return root->erase(result);
+}
+
 extern "C" void * swisstable_map_search_uintptr(swisstableumap_t *root, uintptr_t key)
 {
     auto search = root->find(key);

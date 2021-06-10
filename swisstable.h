@@ -36,6 +36,11 @@ void swisstable_map_free(swisstablemap_t *root);
 // Returns existing key if key already known.
 void * swisstable_map_insert(swisstablemap_t *root, const void *key, size_t keysize, void *value);
 
+// Erase an entry from the table.
+// Returns a size value ranging from 0 to 1 depending on the amounts of elements removed.
+// It is your responsibility to free the keys and values referenced.
+size_t swisstable_map_erase(swisstablemap_t *root, const void* key, size_t keysize);
+
 // Lookup a key in table.
 // Returns value if key is known.
 // Returns NULL if key is not known.
