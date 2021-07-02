@@ -49,6 +49,9 @@ void * swisstable_map_search(swisstablemap_t *root, const void *key, size_t keys
 // Call callback for every known key.
 void swisstable_map_foreach(swisstablemap_t *root, void (*callback)(void *key, void *value));
 
+// Call callback for every known key while passing a common data to all calls, allowing the usage of sideeffect based operations, such as writing to common streams, unordered folding etc.
+void swisstable_map_foreach_sideeffect(swisstablemap_t *root, void (*callback)(void *key, void *value, void* data), void* data);
+
 // These alternatives use integers instead of pointers, so avoid some
 // dereferences and overhead from creating string_view wrappers.
 swisstableumap_t * swisstable_map_create_uintptr(void);
@@ -64,5 +67,5 @@ void swisstable_map_reserve(swisstablemap_t *root, size_t sizehint);
 void swisstable_map_reserve_uintptr(swisstableumap_t *root, size_t sizehint);
 
 #else
-# warning swisstable.h included twice
+// # warning swisstable.h included twice
 #endif

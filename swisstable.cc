@@ -110,6 +110,14 @@ extern "C" void swisstable_map_foreach(swisstablemap_t *root, void (*callback)(v
     return;
 }
 
+extern "C" void swisstable_map_foreach_sideeffect(swisstablemap_t *root, void (*callback)(void *key, void *value, void* data), void* data)
+{
+    for (const auto &p : *root) {
+        callback(const_cast<char *>(p.first.data()), const_cast<void *>(p.second), data);
+    }
+    return;
+}
+
 extern "C" void swisstable_map_foreach_uintptr(swisstableumap_t *root, void (*callback)(uintptr_t key, void *value))
 {
     for (const auto &p : *root) {
